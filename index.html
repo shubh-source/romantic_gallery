@@ -1,0 +1,111 @@
+<!-- Finalized index.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Our Story</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap');* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: gradientShift 10s ease infinite;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 50px 70px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 182, 193, 0.4);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 4em;
+  color: #fff;
+  text-shadow: 2px 2px 8px #fcb5c4;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(45deg, #ff6b6b, #ffb6c1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(255, 105, 135, 0.4);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 105, 135, 0.6);
+}
+
+.heart {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #ffb6c1;
+  animation: floatHeart 7s linear forwards;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  30% { opacity: 0.7; }
+  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Our Love Story</h1>
+    <p>Where every heartbeat is a memory... and every moment is forever.</p>
+    <button onclick="goToGallery()">Enter Gallery ✨</button>
+  </div>  <script>
+    function goToGallery() {
+      window.location.href = 'gallery.html';
+    }
+
+    const heartEmojis = ['❤️','💕','💖','💘'];
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      document.body.appendChild(heart);
+      heart.addEventListener('animationend', () => heart.remove());
+    }, 700);
+  </script></body>
+</html>

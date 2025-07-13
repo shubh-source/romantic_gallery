@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memories - Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #1b0033, #320052);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.carousel {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transition: transform 1s;
+}
+
+.carousel img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 0 30px rgba(255, 192, 203, 0.4);
+  border: 3px solid rgba(255, 192, 203, 0.6);
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background: rgba(255, 192, 203, 0.5);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    width: 240px;
+    height: 320px;
+  }
+  .nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="container">
+    <button class="nav-button prev">&#8249;</button>
+    <div class="carousel" id="carousel"></div>
+    <button class="nav-button next">&#8250;</button>
+  </div>  <script>
+    const imagePaths = [
+      'pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg',
+      'pic5.jpg', 'pic6.jpg', 'pic7.jpg', 'pic8.jpg'
+    ];
+
+    const carousel = document.getElementById('carousel');
+    const imgCount = imagePaths.length;
+    const angle = 360 / imgCount;
+
+    imagePaths.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.transform = `rotateY(${i * angle}deg) translateZ(500px)`;
+      carousel.appendChild(img);
+    });
+
+    let currentRotation = 0;
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      currentRotation += angle;
+      carousel.style.transform = `rotateY(${currentRotation}deg)`;
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+      currentRotation -= angle;
+      carousel.style.transform = `rotateY(${currentRotation}deg)`;
+    });
+
+    // Create stars
+    function createStars(count = 150) {
+      const starsContainer = document.querySelector('.stars');
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.width = star.style.height = Math.random() * 2 + 1 + 'px';
+        starsContainer.appendChild(star);
+      }
+    }
+    createStars();
+  </script></body>
+</html>
